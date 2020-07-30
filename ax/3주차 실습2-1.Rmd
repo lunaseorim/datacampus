@@ -1,0 +1,255 @@
+---
+title: "3주차 실습2-1"
+author: "Jiwon kim"
+date: '`r Sys.Date()`'
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## 1. **일표본 T검정 (One-sample T-test)**
+* 하나의 모집단을 이루고 있는 양적 자료의 모평균에 대한 검정
+* `정규성`을 만족할 경우, 모수적 통계분석 방법을 사용 <br/>
+    1-1) 데이터 불러오기 
+     - A집단의 수축기 혈압을 측정한 자료 
+```{r}
+setwd("/state/partition1/home/ex_data/")
+dat <- read.delim("z_test.txt", header = TRUE)
+head(dat)
+
+str(dat)
+
+```
+
+    1-2) 정규성 검정
+```{r}
+summary(dat$mmhg)
+
+boxplot(dat$mmhg)
+abline(h = mean(dat$mmhg), col = "red", lty = 2)
+text(x = 1, y = mean(dat$mmhg) - 5, labels = "mean : 130.0")
+
+qqnorm(dat$mmhg)
+qqline(dat$mmhg, col = "red")
+
+```
+
+$$ 
+\left\{
+    \begin{array}{l}
+      H_0 : A집단의 수축기 혈압은 정규분포를 따른다.\\
+      H_1 : A집단의 수축기 혈압은 정규분포를 따르지 않는다. 
+    \end{array}
+  \right.
+$$
+
+```{r}
+shapiro.test(dat$mmhg)
+
+```
+
+    1-3) 가설 검정-1 
+     - 모수적 검정(정규성 만족) : t-test
+$$ 
+\left\{
+    \begin{array}{l}
+      H_0 : A집단의 평균 수축기 혈압은 140.0이다.\\
+      H_1 : A집단의 평균 수축기 혈압은 140.0이 아니다. 
+    \end{array}
+  \right.
+$$
+
+```{r}
+t.test(dat$mmhg, mu = 140, alternative = "two.sided")
+
+```
+
+
+    1-4) 가설 검정-2
+     - 비모수적 검정(정규성 불만족) : 윌콕슨의 부호 순위 검정(Wilcoxon Signed-Rank Test)
+     - 자료의 순서를 사용하여 자료의 `중위수` 검정 
+$$ 
+\left\{
+    \begin{array}{l}
+      H_0 : A집단의 수축기 혈압의 중앙값은 140.0이다.\\
+      H_1 : A집단의 수축기 혈압의 중앙값은 140.0이 아니다. 
+    \end{array}
+  \right.
+$$     
+
+```{r}
+setwd("/state/partition1/home/ex_data/")
+dat2 <- read.delim("one_signed_rank_test.txt", header = TRUE)
+dat2
+
+wilcox.test(dat2$cm, mu = 140)
+
+```
+
+
+## 2. **독립 표본 T검정 (Two-sample T-test)**
+* 두 모집단을 이루고 있는 양적 자료의 모평균에 대한 검정
+* 검정 : 정규성 검정, 등분산성 검정 
+
+    2-1) 데이터 불러오기 
+     - 뚜렷한 폐기종(emphysema) 발전 이전의 흡연자와 비흡연자의 폐의 손상 수치
+      (수치가 높을수록 폐의 손상됨이 크다는 것을 의미)
+```{r}
+setwd("/state/partition1/home/ex_data/")
+dat3 <- read.delim("two_sample_T.txt", header = TRUE)
+head(dat3)
+
+str(dat3)
+
+```
+
+    2-2) 검정 1 : 정규성 검정 
+$$ 
+\left\{
+    \begin{array}{l}
+      H_0 : 비흡연자와 흡연자의 폐의 손상 수치는 정규분포를 따른다.\\
+      H_1 : 비흡연자와 흡연자의 폐의 손상 수치는 정규분포를 따르지 않는다. 
+    \end{array}
+  \right.
+$$
+
+```{r}
+boxplot(dat3)
+
+qqnorm(dat3$smoker) ; qqline(dat3$smoker, col = "red")
+qqnorm(dat3$nonsmoker) ; qqline(dat3$nonsmoker, col = "red")
+
+shapiro.test(dat3$smoker)     #정규성 만족
+shapiro.test(dat3$nonsmoker)   #정규성 만족
+
+sapply(dat3[c("smoker", "nonsmoker")], shapiro.test)
+
+```
+
+    2-3) 검정 2 : 두 집단의 등분산성 검정 (F-test)
+$$ 
+\left\{
+    \begin{array}{l}
+      H_0 : 비흡연자와 흡연자의 모분산이 동일하다. (등분산) \\
+      H_1 : 비흡연자와 흡연자의 모분산이 동일하지 않다. (이분산)
+    \end{array}
+  \right.
+$$
+
+```{r}
+var.test(dat3$smoker, dat3$nonsmoker)
+
+```
+
+    2-4) 모수적 검정(정규성 만족, 등분산) : t-test
+$$ 
+\left\{
+    \begin{array}{l}
+      H_0 : 비흡연자와 흡연자 간의 폐의 손상수치는 차이가 없다. \\
+      H_1 : 비흡연자와 흡연자 간의 폐의 손상수치는 차이가 있다.
+    \end{array}
+  \right.
+$$
+
+```{r}
+t.test(dat3$nonsmoker, dat3$smoker, alternative = "two.sided", var.equal = T)
+
+dat3
+dat3_1 <- data.frame(type = rep(c("smoker", "nonsmoker"), each = 17),
+                     value = c(dat3$smoker, dat3$nonsmoker))
+dat3_1
+
+t.test(value ~ type, data = dat3_1, alternative = "two.sided", var.equal = T)
+
+```
+
+    2-5) 모수적 검정(정규성 만족, 이분산) : t-test
+```{r}
+t.test(dat3$smoker, dat3$nonsmoker, alternative = "two.sided", var.equal = F)
+
+```
+
+    2-6) 비모수적 검정(정규성 불만족) : 윌콕슨 순위합 검정 (Wilcoxon Rank Sum Test)
+     - 순위데이터로 변환하여 분포가 겹치는 정도를 나타내는 통계량을 계산
+$$ 
+\left\{
+    \begin{array}{l}
+      H_0 : 비흡연자와 흡연자간의 폐의 손상수치는 차이가 없다. \\
+      H_1 : 비흡연자와 흡연자간의 폐의 손상수치는 차이가 있다.
+    \end{array}
+  \right.
+$$
+```{r}
+wilcox.test(dat3$smoker, dat3$nonsmoker, alternative = "two.sided")
+
+```
+
+    
+## 3. **대응 표본 T검정 (Two-sample T-test)**
+* 실험 전후에 두 자료 간 평균 차이를 검증하는 방법
+ -예: 쌍둥이와 같이 서로 비슷한 체질의 환자를 짝을 지어 서로 다른 두 치료방법을 비교하는 경우
+ - 예: 동일한 암환자에게 화학치료를 시술하여 치료 전 (처리1)과 치료 후(처리2)의 상태를 비교
+하는 경우
+
+    3-1) 데이터 불러오기
+```{r}
+setwd("/state/partition1/home/ex_data/")
+dat3 <- read.delim("paired_T.txt", header = TRUE)
+
+str(dat3)
+
+```
+
+    3-2) 정규성 검정 
+$$ 
+\left\{
+    \begin{array}{l}
+      H_0 : 약 복용 전후 몸무게 차이가 정규분포를 따른다. \\
+      H_1 : 약 복용 전후 몸무게 차이가 정규분포를 따르지 않는다.
+    \end{array}
+  \right.
+$$    
+
+```{r}
+shapiro.test(dat3$diff)
+
+```
+
+    3-3) 모수적 검정(정규성 만족) : t-test
+$$ 
+\left\{
+    \begin{array}{l}
+      H_0 : 방사선 치료를 받기 전과 받은 후의 몸무게 차이가 없다. \\
+      H_1 : 방사선 치료를 받기 전과 받은 후의 몸무게 차이가 있다.
+    \end{array}
+  \right.
+$$    
+
+```{r}
+t.test(dat3$after, dat3$before, paired = T)
+```
+    
+    3-4) 비모수적 검정(정규성 불만족) : 윌콕슨의 부호 순위 검정(Wilcoxon Signed-Rank Test)
+     - 두 값의 차이의 데이터로 변환하여 부호검정 또는 부호순위 검정 적용
+$$ 
+\left\{
+    \begin{array}{l}
+      H_0 : 방사선 치료를 받기 전과 받은 후의 몸무게 차이가 없다. \\
+      H_1 : 방사선 치료를 받기 전과 받은 후의 몸무게 차이가 있다.
+    \end{array}
+  \right.
+$$          
+```{r}
+setwd("/state/partition1/home/ex_data/")
+dat4 <- read.delim("wilcox_signed_rank_test.txt", header = TRUE)
+
+wilcox.test(dat4$weight ~ dat4$group, paired = TRUE)
+
+```
+
+    

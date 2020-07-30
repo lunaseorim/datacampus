@@ -1,0 +1,30 @@
+
+t(raw_icu[,-1:-2])
+
+list_icu <- list_parse2(
+  t(raw_icu[,-1:-2]) %>%
+    data.frame()
+)
+
+
+melt_raw_icu <- raw_icu %>%
+  `colnames<-`(
+    c(
+      "date", "time", "서울", "부산", "대구", "인천",
+      "광주", "대전", "울산", "세종",
+      "경기", "강원", "충북", "충남", "전북",
+      "전남", "경북", "경남", "제주"
+    )
+  ) %>%
+  `[`(,-1:-2) %>%
+  mutate(nr = 1:nrow(.)) %>%
+  melt(id.vars = "nr")
+
+icu_drilldown <- melt_raw_icu %>%
+  `[`(,-1) %>%
+  group_nest(variable) %>%
+  mutate(
+    id = variable,
+    type = "column"
+  )
+

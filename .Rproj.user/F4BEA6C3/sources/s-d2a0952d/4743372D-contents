@@ -1,0 +1,59 @@
+library(dplyr)
+library(reshape2)
+library(shinydashboard)
+library(highcharter)
+library(shiny.semantic)
+
+setwd("/home/yd0010/yd_10")
+
+source("shiny_app/global.r")
+
+ui <- dashboardPage(
+  dashboardHeader(
+    title = "icu beds"
+  ),
+  dashboardSidebar(
+    size = "thin", color = "teal",
+    sidebarMenu(
+      menuItem(tabName = "main", "Main"),
+      menuItem(tabName = "extra", "Extra")
+    )
+  ),
+  dashboardBody(
+    fluidRow(
+      box(
+        color = "blue", ribbon = T,
+        title = "전국 가용 중환자실", width = 5, solidHeader = TRUE, status = "primary",
+        paste0(global_total[1,2],"/",global_total[2,2])
+      )),
+    fluidRow(
+      column(
+        width = 8, title = "전국 현황", height = "300px",
+        highchartOutput("hc_global", height = "300px")
+      )
+    ),
+    fluidRow(
+      box_geo(3), box_geo(4), box_geo(5), box_geo(6), box_geo(7), box_geo(8)
+    ),
+    fluidRow(
+      box_geo(9), box_geo(10), box_geo(11), box_geo(12), box_geo(13), box_geo(14)
+    ),
+    fluidRow(
+      box_geo(15), box_geo(16), box_geo(17), box_geo(18), box_geo(19)
+    )
+  )
+)
+
+
+## output
+
+
+
+server <- function(input, output) {
+  output$hc_global <- renderHighchart({
+    hc <- ""
+  })
+}
+
+
+shinyApp(ui, server)

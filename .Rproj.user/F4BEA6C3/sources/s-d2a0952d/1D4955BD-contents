@@ -1,0 +1,41 @@
+library(shiny)
+
+
+source("shiny_app/global.r")
+source("shiny_app/highcharts.r")
+
+if (interactive()) {
+  shinyApp(
+    ui = fluidPage(
+      wellPanel("mouseOver and click points for additional information"),
+      uiOutput("click_ui"),
+      highchartOutput("plot_hc"),
+      highchartOutput("plot_hc_semi")
+    ),
+    server = function(input, output) {
+      
+      myClickFunc <- JS("function(event) {Shiny.onInputChange('hcClicked', this.name);}")
+      
+      output$plot_hc <- renderHighchart({
+        hcmap(
+          map = "countries/kr/kr-all",
+          data = hc_key,
+          value = "perc",
+          dataLabels = list(enabled = F)
+        ) %>%
+          hc_add_event_point(event = "click") %>%
+          hc_plotOptions(series = list(stacking = FALSE, events = list(click = myClickFunc)))
+      })
+    
+      output$click_ui <- renderUI({
+        if (is.null(input$plot_hc_click)) {
+          return()
+        }
+        wellPanel("Coordinates of clicked point: ", input$plot_hc_click$x, input$plot_hc_click$y)
+        
+      })
+      
+      output$plot_hc_semi <- renderText({ paste( input$hcClicked$x,input$hcClicked$y) }) 
+    }
+  )
+}

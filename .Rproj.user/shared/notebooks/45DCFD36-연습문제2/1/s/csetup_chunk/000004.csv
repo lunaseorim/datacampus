@@ -1,0 +1,642 @@
+"0","install.packages(""pgirmess"")
+"
+"2","Installing package into ‘/state/partition1/home/yd0010/R/x86_64-pc-linux-gnu-library/3.6’
+(as ‘lib’ is unspecified)
+"
+"2","also installing the dependencies ‘units’, ‘sf’, ‘rgdal’, ‘rgeos’, ‘spdep’
+
+"
+"2","trying URL 'https://cran.rstudio.com/src/contrib/units_0.6-7.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 957214 bytes (934 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 934 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/src/contrib/sf_0.9-5.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 9001885 bytes (8.6 MB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 8.6 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/src/contrib/rgdal_1.5-12.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 2302403 bytes (2.2 MB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 2.2 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/src/contrib/rgeos_0.5-3.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 258996 bytes (252 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 252 KB
+
+"
+"2","trying URL 'https://cran.rstudio.com/src/contrib/spdep_1.1-5.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 2867051 bytes (2.7 MB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 2.7 MB
+
+"
+"2","trying URL 'https://cran.rstudio.com/src/contrib/pgirmess_1.6.9.tar.gz'
+"
+"2","Content type 'application/x-gzip'"
+"2"," length 64602 bytes (63 KB)
+"
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","="
+"2","
+"
+"2","downloaded 63 KB
+
+"
+"2","* installing *source* package ‘units’ ...
+"
+"2","** package ‘units’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"1","configure: units: 0.6-7
+"
+"1","checking whether the C++ compiler works... "
+"1","yes
+"
+"1","checking for C++ compiler default output file name... a.out
+"
+"1","checking for suffix of executables... "
+"1","
+"
+"1","checking whether we are cross compiling... "
+"1","no
+"
+"1","checking for suffix of object files... "
+"1","o
+"
+"1","checking whether we are using the GNU C++ compiler... "
+"1","yes
+"
+"1","checking whether g++ -std=gnu++11 accepts -g... "
+"1","yes
+"
+"1","checking how to run the C++ preprocessor... "
+"1","g++ -std=gnu++11 -E
+"
+"1","checking for grep that handles long lines and -e... "
+"1","/usr/bin/grep
+"
+"1","checking for egrep... "
+"1","/usr/bin/grep -E
+"
+"1","checking for ANSI C header files... "
+"1","yes
+"
+"1","checking for sys/types.h... "
+"1","yes
+"
+"1","checking for sys/stat.h... "
+"1","yes
+"
+"1","checking for stdlib.h... "
+"1","yes
+"
+"1","checking for string.h... "
+"1","yes
+"
+"1","checking for memory.h... "
+"1","yes
+"
+"1","checking for strings.h... "
+"1","yes
+"
+"1","checking for inttypes.h... "
+"1","yes
+"
+"1","checking for stdint.h... "
+"1","yes
+"
+"1","checking for unistd.h... "
+"1","yes
+"
+"1","checking for stdbool.h that conforms to C99... "
+"1","yes
+"
+"1","checking for _Bool... "
+"1","no
+"
+"1","checking for error_at_line... "
+"1","yes
+"
+"1","checking for gcc... "
+"1","gcc -std=gnu99
+"
+"1","checking whether we are using the GNU C compiler... "
+"1","yes
+"
+"1","checking whether gcc -std=gnu99 accepts -g... "
+"1","yes
+"
+"1","checking for gcc -std=gnu99 option to accept ISO C89... "
+"1","none needed
+"
+"1","checking for XML_ParserCreate in -lexpat... "
+"1","yes
+"
+"1","checking udunits2.h usability... "
+"1","no
+"
+"1","checking udunits2.h presence... "
+"1","no
+"
+"1","checking for udunits2.h... no
+"
+"1","checking udunits2/udunits2.h usability... "
+"1","no
+"
+"1","checking udunits2/udunits2.h presence... "
+"1","no
+"
+"1","checking for udunits2/udunits2.h... no
+"
+"1","checking for ut_read_xml in -ludunits2... "
+"1","no
+"
+"2","configure: error: in `/tmp/RtmpuMnYYU/R.INSTALL41bd42dfe5a4/units':
+"
+"2","configure: error: 
+--------------------------------------------------------------------------------
+  Configuration failed because libudunits2.so was not found. Try installing:
+    * deb: libudunits2-dev (Debian, Ubuntu, ...)
+    * rpm: udunits2-devel (Fedora, EPEL, ...)
+    * brew: udunits (OSX)
+  If udunits2 is already installed in a non-standard location, use:
+    --configure-args='--with-udunits2-lib=/usr/local/lib'
+  if the library was not found, and/or:
+    --configure-args='--with-udunits2-include=/u"
+"2","sr/include/udunits2'
+  if the header was not found, replacing paths with appropriate values.
+  You can alternatively set UDUNITS2_INCLUDE and UDUNITS2_LIBS manually.
+--------------------------------------------------------------------------------
+
+See `config.log' for more details
+"
+"2","ERROR: configuration failed for package ‘units’
+"
+"2","* removing ‘/state/partition1/home/yd0010/R/x86_64-pc-linux-gnu-library/3.6/units’
+"
+"1","Warning in "
+"1",""
+"1","install.packages"
+"1",""
+"1"," :
+  "
+"1",""
+"1","installation of package ‘units’ had non-zero exit status"
+"1",""
+"1","
+"
+"2","* installing *source* package ‘rgdal’ ...
+"
+"2","** package ‘rgdal’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"1","configure: R_HOME: /export/home/shared_env/tools/R-3.6.2/lib64/R
+"
+"1","configure: CC: gcc -std=gnu99
+"
+"1","configure: CXX: g++ -std=gnu++11
+"
+"1","configure: CXX11 is: g++, CXX11STD is: -std=gnu++11
+"
+"1","configure: CXX is: g++ -std=gnu++11
+configure: C++11 support available
+"
+"1","configure: rgdal: 1.5-12
+checking for /usr/bin/svnversion... yes
+configure: svn revision: 1018
+checking for gdal-config... no
+no
+"
+"2","configure: error: gdal-config not found or not executable.
+"
+"2","ERROR: configuration failed for package ‘rgdal’
+"
+"2","* removing ‘/state/partition1/home/yd0010/R/x86_64-pc-linux-gnu-library/3.6/rgdal’
+"
+"1","Warning in "
+"1",""
+"1","install.packages"
+"1",""
+"1"," :
+  "
+"1",""
+"1","installation of package ‘rgdal’ had non-zero exit status"
+"1",""
+"1","
+"
+"2","* installing *source* package ‘rgeos’ ...
+"
+"2","** package ‘rgeos’ successfully unpacked and MD5 sums checked
+"
+"2","** using staged installation
+"
+"1","configure: CC: gcc -std=gnu99
+"
+"1","configure: CXX: g++ -std=gnu++11
+configure: rgeos: 0.5-3
+checking for /usr/bin/svnversion... "
+"1","yes
+"
+"1","configure: svn revision: 634
+"
+"1","checking for geos-config... "
+"1","no
+"
+"1","no
+"
+"2","configure: error: geos-config not found or not executable.
+"
+"2","ERROR: configuration failed for package ‘rgeos’
+"
+"2","* removing ‘/state/partition1/home/yd0010/R/x86_64-pc-linux-gnu-library/3.6/rgeos’
+"
+"1","Warning in "
+"1",""
+"1","install.packages"
+"1",""
+"1"," :
+  "
+"1",""
+"1","installation of package ‘rgeos’ had non-zero exit status"
+"1",""
+"1","
+"
+"2","ERROR: dependency ‘units’ is not available for package ‘sf’
+"
+"2","* removing ‘/state/partition1/home/yd0010/R/x86_64-pc-linux-gnu-library/3.6/sf’
+"
+"1","Warning in "
+"1",""
+"1","install.packages"
+"1",""
+"1"," :
+  "
+"1",""
+"1","installation of package ‘sf’ had non-zero exit status"
+"1",""
+"1","
+"
+"2","ERROR: dependency ‘sf’ is not available for package ‘spdep’
+"
+"2","* removing ‘/state/partition1/home/yd0010/R/x86_64-pc-linux-gnu-library/3.6/spdep’
+"
+"1","Warning in "
+"1",""
+"1","install.packages"
+"1",""
+"1"," :
+  "
+"1",""
+"1","installation of package ‘spdep’ had non-zero exit status"
+"1",""
+"1","
+"
+"2","ERROR: dependencies ‘rgdal’, ‘rgeos’, ‘spdep’ are not available for package ‘pgirmess’
+"
+"2","* removing ‘/state/partition1/home/yd0010/R/x86_64-pc-linux-gnu-library/3.6/pgirmess’
+"
+"1","Warning in "
+"1",""
+"1","install.packages"
+"1",""
+"1"," :
+  "
+"1",""
+"1","installation of package ‘pgirmess’ had non-zero exit status"
+"1",""
+"1","
+"
+"2","
+"
+"2",""
+"2","The downloaded source packages are in
+	‘/tmp/Rtmpb0gRSF/downloaded_packages’"
+"2",""
+"2","
+"

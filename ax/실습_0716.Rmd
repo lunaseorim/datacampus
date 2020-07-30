@@ -1,0 +1,101 @@
+---
+title: '0716'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(plyr)
+library(tibble)
+
+```
+
+## 123
+
+```{r cars}
+
+A1 <- read.csv("t1_2002_0714.csv") %>%
+  `colnames<-`(c("person","ykiho","recu","dsbjt","main","sub","inpat","recn","vscn","add","tramt","sbrdn","bjrdn","dmd"))
+
+#3번
+nrow(A1)
+
+head(A1,5)
+
+str(A1)
+
+A1[unique(A1$person),]
+
+length(unique(A1$person))
+
+
+```
+
+#4번
+
+```{r pressure, echo=FALSE}
+
+mean(A1$recn[substr(A1$main,1,1) == "K"])
+
+A1$dsbjt[A1$vscn>20]
+
+sum(A1$sub == "")
+
+sum(substr(A1$inpat,2,2)==2)
+
+
+sum(A1$inpat==12)
+
+#5번
+
+mean(A1$sbrdn[substr(A1$recu,1,6) == 200207 ],na.rm = T)
+
+ddply(A1,~dsbjt,summarise,mean=mean(tramt,na.rm = T))
+
+
+```
+
+#6번
+
+```{r 6번}
+
+A1$cate <- substr(A1$main,1,1)
+
+unique(A1$cate)[order(unique(A1$cate))]
+
+A1$add<-paste0(A1$add,"%")
+
+A1$emer<-ifelse(substr(A1$inpat,2,2)==1,print("emergency"),print("-"))
+
+
+```
+#7번
+
+```{r 7번}
+
+
+A7_1 <- add_column(A1
+                 ,sick = ifelse(
+                    substr(A1$main,1,1)==substr(A1$sub,1,1)
+                   ,substr(A1$main,1,1)
+                   ,substr(A1$sub,1,1))
+                 ,.after = "sub")
+
+A7_2 <- add_column(A1
+                   ,month = paste0(
+                     substr(A1$recu,5,6),"월")
+                   ,.after = recu
+)
+
+
+table(A7_2$month)
+
+
+
+
+
+
+
+
+
+
+```

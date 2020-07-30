@@ -1,0 +1,130 @@
+---
+title: "Untitled"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+
+
+```
+
+## 연습문제 1
+
+```{r cars}
+data(iris)
+
+#1.1 EDA
+str(iris)
+summary(iris)
+head(iris,4)
+nrow(iris)
+ncol(iris)
+dim(iris)
+
+#2 수치형,명목형
+str(iris)
+
+hist(iris$Sepal.Length)
+abline(v=mean(iris$Sepal.Length))
+
+#3 test
+attach(iris)
+
+##3.1 1sample t-test
+
+shapiro.test(Sepal.Length)
+
+#H0 : 길이가 mu=5 와 같다.
+#H1 : 길이가 mu=5 보다 크다 (alternative = "greater")
+
+t.test(Sepal.Length , mu=5, alternative = "greater")
+
+##3.2 2samples t-test
+
+#H0 : 분산 차이가 없다.
+#H1 : 분산 차이가 있다.
+
+var.test(Sepal.Length,Sepal.Width)
+
+#H0 : 길이와 너비는 차이가 없다.
+#H1 : 길이와 너비는 차이가 있다.
+
+t.test(Sepal.Length,Sepal.Width, var.equal = F)
+
+##3.3 대응표본 t-test
+set.seed(2020)
+bef <- sample(30:50, 40,replace = T)
+af <- sample(50:70, 40,replace = T)
+
+#H0 : 둘의 차이가 없다
+#H1 : 둘의 차이가 있다
+
+t.test(bef,af, paired = T)
+
+##3.4 Correl
+#H0 : 상관없다
+#H1 : 상관있다
+
+cor.test(Sepal.Length,Sepal.Width,method = "pearson")
+
+##3.5 교차분석
+chisq.test(iris[iris$Species == "setosa",1],
+           iris[iris$Species == "versicolor",1])
+
+
+detach(iris)
+```
+
+## 연습문제 2
+
+```{r 2nd, echo=FALSE}
+data("faithful")
+str(faithful)
+
+plot(faithful)
+abline(33.4744,10.7296)
+
+attach(faithful)
+
+cor(eruptions,waiting)
+
+m1 <- lm(waiting~eruptions ,data = faithful)
+
+summary(m1)
+
+detach(faithful)
+
+data("attitude")
+str(attitude)
+
+m2 <- lm(rating ~ . ,attitude)
+
+summary(m2)
+
+m3 <- step(m2, direction = "both")
+
+summary(m3)
+
+
+
+```
+
+## Ex3
+
+```{r ex3}
+
+s.tar <- data.frame(carlton = c(0.16,0.14,0.21,0.14,0.13),
+                    now = c(0.19,0.20,0.23,0.18,0.18),
+                    cambridge = c(0.21,0.17,0.19,0.23,0.20))
+
+melt(s.tar)
+
+t.test(s.tar$carlton,s.tar$now)
+t.test(s.tar$now,s.tar$cambridge)
+t.test(s.tar$carlton,s.tar$cambridge)
+
+
+```
