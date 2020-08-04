@@ -44,8 +44,10 @@ beds_lim <- readRDS("total_beds.rds") %>%
 icu_global <- join(icu_data, beds_lim, by = "variable") %>%
   `colnames<-`(c("variable", "beds", "limit"))
 
-icu_global$beds <- as.numeric(icu_global$beds)
-icu_global$limit <- as.numeric(icu_global$limit)
+icu_global[,2:3] <- sapply(
+  icu_global[,2:3],as.numeric
+)
+
 
 ### --- 1.4 calc total_beds ---
 

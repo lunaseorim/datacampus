@@ -24,19 +24,9 @@ hc_key <- mapdata %>%
   join(., icu_global, match = "all", "variable") %>%
   mutate(perc = round(beds / limit, 2))
 
-hcmap(
-  map = "countries/kr/kr-all",
-  data = hc_key,
-  value = "perc",
-  dataLabels = list(enabled = F)
-) %>%
-  hc_plotOptions(
-    series = list(
-      cursor = "pointer",
-      point = list(
-        events = list(
-          click =
-          )
-      )
-    )
-  )
+#hcmap(
+#  map = "countries/kr/kr-all",
+#  data = hc_key,
+#  value = "perc",
+#  dataLabels = list(enabled = F)
+#)

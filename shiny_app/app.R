@@ -9,7 +9,6 @@
 
 library(dplyr)
 library(reshape2)
-library(shinydashboard)
 library(highcharter)
 library(shinyjs)
 
@@ -22,30 +21,36 @@ source("shiny_app/highcharts.r")
 
 ## --- 1. SHINY : UI ---
 
-
-
-ui <- dashboardPage(
+ui <- dashboardPage(theme = "United",
   dashboardHeader(
-    title = "icu beds"
+    title = "icu beds",
+    color = "green",
+    inverted = T
   ),
   dashboardSidebar(
     size = "thin", color = "teal",
     sidebarMenu(
-      menuItem(tabName = "overview", "개요"),
+      menuItem(tabName = "overview", "개요", icon = icon("home")),
       menuItem(tabName = "region", "지역")
     )
   ),
   dashboardBody(
     fluidRow(
       box(
-        color = "blue", ribbon = T,
+        color = "green", ribbon = F,
         title = "전국 가용 중환자실", width = 5, solidHeader = TRUE, status = "primary",
         paste0(global_total[1,2],"/",global_total[2,2])
-      )),
+        ),
+      box(
+        color = "green", ribbon = F,
+        title = "전국 가용 중환자실 (%)", width = 5, solidHeader = TRUE, status = "primary",
+        paste0(round(global_total[1,2]/global_total[2,2],2),"%")
+        )
+      ),
     fluidRow(
-      column(
-        width = 8, title = "전국 현황", height = "700px",
-        highchartOutput("hc_global", height = "700px")
+      box(ribbon = F, color="green",
+        width = 8, title = "전국 현황", height = "600px",
+        highchartOutput("hc_global", height = "600px")
       )
     )
   )
