@@ -11,6 +11,8 @@ library(dplyr)
 library(reshape2)
 library(highcharter)
 library(shinyjs)
+library(semantic.dashboard)
+library(shiny.semantic)
 
 ## --- 0.2 set @Rstudio ---
 
@@ -21,7 +23,7 @@ source("shiny_app/highcharts.r")
 
 ## --- 1. SHINY : UI ---
 
-ui <- dashboardPage(theme = "United",
+ui <- dashboardPage(
   dashboardHeader(
     title = "icu beds",
     color = "green",
@@ -30,7 +32,7 @@ ui <- dashboardPage(theme = "United",
   dashboardSidebar(
     size = "thin", color = "teal",
     sidebarMenu(
-      menuItem(tabName = "overview", "개요", icon = icon("home")),
+      menuItem(tabName = "overview", "개요"),
       menuItem(tabName = "region", "지역")
     )
   ),
@@ -38,13 +40,13 @@ ui <- dashboardPage(theme = "United",
     fluidRow(
       box(
         color = "green", ribbon = F,
-        title = "전국 가용 중환자실", width = 5, solidHeader = TRUE, status = "primary",
+        title = "전국 가용 중환자실", width = 8, solidHeader = TRUE,
         paste0(global_total[1,2],"/",global_total[2,2])
         ),
       box(
         color = "green", ribbon = F,
-        title = "전국 가용 중환자실 (%)", width = 5, solidHeader = TRUE, status = "primary",
-        paste0(round(global_total[1,2]/global_total[2,2],2),"%")
+        title = "전국 가용 중환자실 (%)", width = 8, solidHeader = TRUE,
+        paste0(round(global_total[1,2]/global_total[2,2]*100,2),"%")
         )
       ),
     fluidRow(

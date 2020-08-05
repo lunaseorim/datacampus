@@ -62,10 +62,3 @@ global_total <- data.frame(
 ## --- 2 Global Environment // Custom Functions ---
 
 ### --- 2.1 shiny box function ---
-box_geo <- function(a) {
-  box(
-    color = "blue", ribbon = T,
-    title = as.character(icu_global$variable[a - 2]), width = 2, solidHeader = TRUE, status = "primary",
-    paste0(icu_global$beds[a - 2], "/", icu_global$limit[a - 2])
-  )
-}
