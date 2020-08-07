@@ -1,5 +1,5 @@
 
-# ---Crawling ICU Beds ---
+# ---call data. ICU Beds ---
 
 # Author : yd0010@20143311
 # Date : 2020-07-21
@@ -8,7 +8,7 @@
 ## ---Load Package---
 library(XML)
 library(dplyr)
-library(telegram.bot)
+#library(telegram.bot)
 
 setwd("/home/yd0010/yd_10")
 
@@ -69,15 +69,11 @@ saveRDS(icu_data, "icu_data.rds")
 
 
 ## ---Report @telegram.bot---
-
-seor_bot <- Bot(token = "1366384353:AAE2uhGZI-ucKS4TSqwomdaNepU7l8nP1gw")
-
-my_id <- "939729298" # id : 939729298
-
-beds_cond <- any(is.na(a2)) | any(a2 == 0)
-
-if (beds_cond) {
-  seor_bot$sendMessage(my_id,
-    text = paste0("데이터 이상 발생","\n",Sys.time())
-  )
-}
+#seor_bot <- Bot(token = "1366384353:AAE2uhGZI-ucKS4TSqwomdaNepU7l8nP1gw")
+#my_id <- "939729298" # id : 939729298
+#beds_cond <- any(is.na(a2)) | any(a2 == 0)
+#if (beds_cond) {
+#  seor_bot$sendMessage(my_id,
+#    text = paste0("데이터 이상 발생","\n",Sys.time())
+#  )
+#}
