@@ -30,3 +30,17 @@ hc_key <- mapdata %>%
 #  value = "perc",
 #  dataLabels = list(enabled = F)
 #)
+
+rec24_beds <- raw_icu %>%
+  `[`(,-1:-2) %>%
+  filter(서울특별시 != 0 , 경상북도 != 0) %>%
+  sapply(as.numeric) %>%
+  data.frame() %>%
+  mutate(total = rowSums(.),
+         rc = 1:nrow(.))
+
+
+
+
+
+
