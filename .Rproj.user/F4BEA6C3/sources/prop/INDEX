@@ -14,6 +14,7 @@
 %2Fstate%2Fpartition1%2Fhome%2Fyd0010%2Fyd_10%2Fa%2Fglobal.r="54AD200F"
 %2Fstate%2Fpartition1%2Fhome%2Fyd0010%2Fyd_10%2Fhighcharter.R="59209998"
 %2Fstate%2Fpartition1%2Fhome%2Fyd0010%2Fyd_10%2Fkeras_timeseries.r="7D8C6D96"
+%2Fstate%2Fpartition1%2Fhome%2Fyd0010%2Fyd_10%2Fshiny_app%2Fexc1.r="803E7295"
 ~%2F.gitignore="7C9383B4"
 ~%2Fyd_10%2F.Rhistory="887845D0"
 ~%2Fyd_10%2F.gitignore="20E54838"
@@ -36,4 +37,5 @@
 ~%2Fyd_10%2Fshiny_app%2Fexc.R="6D6B79D4"
 ~%2Fyd_10%2Fshiny_app%2Fglobal.r="3A90E75E"
 ~%2Fyd_10%2Fshiny_app%2Fhighcharts.r="F60760EF"
+~%2Fyd_10%2Fshiny_app%2Fwww%2Ftab.js="49253F9E"
 ~%2Fyd_10%2Fweek3.rmd="BD1DEC"

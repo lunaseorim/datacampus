@@ -1,5 +1,0 @@
-dfan <- data.frame(
-  name = c("Cats", "Dogs", "Cows", "Sheep", "Pigs"),
-  value = c(4, 3, 1, 2, 1)
-)
-dsan <- list_parse2(dfan)
