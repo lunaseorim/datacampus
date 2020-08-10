@@ -39,8 +39,3 @@ rec24_beds <- raw_icu %>%
   mutate(total = rowSums(.),
          rc = 1:nrow(.))
 
-
-
-
-
-

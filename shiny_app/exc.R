@@ -2,6 +2,7 @@ library(shiny)
 library(shiny.semantic)
 library(highcharter)
 library(semantic.dashboard)
+library(shinyjs)
 
 
 ui <- function() {
@@ -60,6 +61,7 @@ server <- shinyServer(function(input, output) {
       dataLabels = list(enabled = F)
     )
   })
+ runjs("shiny_app/www/tab.js")
 })
 
 shinyApp(ui = ui(), server = server)
