@@ -53,9 +53,23 @@ ui <- shinyUI(semanticPage(
           content =div(class= "ui grid",style = "margin-top: 15px;",
             tabset(
               list(
-                list_local,
-                list(menu = "경기", id = "gg_tab", 
-                     content = div())
+                list_local("서울","seoul",3,1),
+                list_local("부산","bs",4,2),
+                list_local("대구","dg",5,3),
+                list_local("인천","ic",6,4),
+                list_local("광주","gj",7,5),
+                list_local("대전","dj",8,6),
+                list_local("울산","ul",9,7),
+                list_local("세종","se",10,8),
+                list_local("경기","gg",11,9),
+                list_local("강원","kw",12,10),
+                list_local("충북","cb",13,11),
+                list_local("충남","cn",14,12),
+                list_local("전북","jb",15,13),
+                list_local("전남","jn",16,14),
+                list_local("경북","kb",17,15),
+                list_local("경남","kn",18,16),
+                list_local("제주","jj",19,17),
               ),
               active = "seoul_tab",
               id = "localtabset",
@@ -86,10 +100,24 @@ server <- shinyServer(function(input, output) {
     rec24_beds %>%
       hchart("line", hcaes(x = rc, y = total))
   })
-  output$line_seoul <- renderHighchart({
-    rec24_beds %>%
-      hchart("line", hcaes(x = rc, y = 서울특별시))
-  })
+  output$line_seoul <- hc_local("서울특별시")
+  output$line_bs <- hc_local("서울특별시")
+  output$line_dg <- hc_local("서울특별시")
+  output$line_ic <- hc_local("서울특별시")
+  output$line_gj <- hc_local("서울특별시")
+  output$line_seoul <- hc_local("서울특별시")
+  output$line_seoul <- hc_local("서울특별시")
+  output$line_seoul <- hc_local("서울특별시")
+  output$line_seoul <- hc_local("서울특별시")
+  output$line_seoul <- hc_local("서울특별시")
+  output$line_seoul <- hc_local("서울특별시")
+  output$line_seoul <- hc_local("서울특별시")
+  output$line_seoul <- hc_local("서울특별시")
+  output$line_seoul <- hc_local("서울특별시")
+  output$line_seoul <- hc_local("서울특별시")
+  output$line_seoul <- hc_local("서울특별시")
+  output$line_seoul <- hc_local("서울특별시")
+  
 })
 
 shiny::shinyApp(ui, server)

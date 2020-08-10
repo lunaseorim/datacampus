@@ -100,46 +100,57 @@ box_Card <- function(text_1,beds,lim,setid) {
   )
 }
 
-box_Card_semi <- function(text_1,i,j,setid) {
-  div(
-    class = "row", style = "width: 450px;",
-    div(
-      class = "ui raised segment",
-      div(
-        class = "ui horizontal divider",
-        div(style = "font-size:20px;", icon("procedures"), text_1)
-      ),
-      p(
-        style = "font-size:25px; margin: 15px 0px; text-align: center;",
-        paste0(as.numeric(raw_icu[nrow(raw_icu), i]), "/", beds_lim$value[j])
-      ),
-      div(
-        class = "ui blue progress",
-        `data-percent` = round(as.numeric(raw_icu[nrow(raw_icu), i]) / beds_lim$value[j] * 100, 2), id = "bar1",
-        div(
-          class = "bar",
-          style = paste0("width:", round(as.numeric(raw_icu[nrow(raw_icu), i]) / beds_lim$value[j] * 100, 2), "%;")
-        ),
-        div(
-          class = "label", style = "font-size:15px;",
-          paste0(round(as.numeric(raw_icu[nrow(raw_icu), i]) / beds_lim$value[j] * 100, 2), "%")
-        )
-      ), 
-      div(
-        class = "ui horizontal divider",
-        div(style = "font-size:20px;", icon("chart line"), "최근 가용수")
-      ),
-      div(
-        style = "margin-top: 15px; height: 300px;",
-        highchartOutput(setid, width = "100%", height = "100%")
-      )
-    )
-  )
-}
+
 
 list_local <- function(main_name,main_eng,i,j) {
+  
+  box_Card_semi <- function(text_1,i,j,setid) {
+    div(
+      class = "row", style = "width: 450px;",
+      div(
+        class = "ui raised segment",
+        div(
+          class = "ui horizontal divider",
+          div(style = "font-size:20px;", icon("procedures"), text_1)
+        ),
+        p(
+          style = "font-size:25px; margin: 15px 0px; text-align: center;",
+          paste0(as.numeric(raw_icu[nrow(raw_icu), i]), "/", beds_lim$value[j])
+        ),
+        div(
+          class = "ui blue progress",
+          `data-percent` = round(as.numeric(raw_icu[nrow(raw_icu), i]) / beds_lim$value[j] * 100, 2), id = "bar1",
+          div(
+            class = "bar",
+            style = paste0("width:", round(as.numeric(raw_icu[nrow(raw_icu), i]) / beds_lim$value[j] * 100, 2), "%;")
+          ),
+          div(
+            class = "label", style = "font-size:15px;",
+            paste0(round(as.numeric(raw_icu[nrow(raw_icu), i]) / beds_lim$value[j] * 100, 2), "%")
+          )
+        ), 
+        div(
+          class = "ui horizontal divider",
+          div(style = "font-size:20px;", icon("chart line"), "최근 가용수")
+        ),
+        div(
+          style = "margin-top: 15px; height: 300px;",
+          highchartOutput(setid, width = "100%", height = "100%")
+        )
+      )
+    )
+  }
+  
   list(
     menu = main_name , id = paste0(main_eng,"_tab"),
     content =
-      box_Card_semi(paste0(main_name," ","가용수"),i, j, paste0("line_","main_eng")))
+      box_Card_semi(paste0(main_name," ","가용수"),i, j, paste0("line_",main_eng)))
+
+}
+
+hc_local <- function(n){
+  renderHighchart({
+    rec24_beds %>%
+      hchart("line", hcaes(x = rc, y = n))
+  })
 }
