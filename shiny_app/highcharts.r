@@ -7,9 +7,7 @@
 
 ## ---Load Package---
 library(highcharter)
-
-setwd("/home/yd0010/yd_10")
-source("shiny_app/global.r")
+source("global.r")
 
 ## --- 1. Set Map ---
 
@@ -32,10 +30,11 @@ hc_key <- mapdata %>%
 #)
 
 rec24_beds <- raw_icu %>%
-  `[`(,-1:-2) %>%
+  `[`( ,-1:-2) %>%
   filter(서울특별시 != 0 , 경상북도 != 0) %>%
   sapply(as.numeric) %>%
   data.frame() %>%
+  `[`((nrow(.)-47):nrow(.),) %>%
   mutate(total = rowSums(.),
-         rc = 1:nrow(.))
+         rc = -48:-1)
 

@@ -12,9 +12,6 @@ library(reshape2)
 library(semantic.dashboard)
 
 ## --- 1 Global Environmnet // R.data ---
-
-setwd("/home/yd0010/yd_10")
-
 ### --- 1.1 icudata.RDS ---
 #### raw_icu : 전체데이터
 raw_icu <- readRDS("icu_data.rds")
@@ -67,7 +64,7 @@ box_Card <- function(text_1,beds,lim,setid) {
   div(
     class = "column",
     div(
-      class = "ui raised segment",
+      class = "ui raised segment",style = "height: 700px;",
       div(
         class = "ui horizontal divider",
         div(style = "font-size:20px;", icon("procedures"), text_1)
@@ -90,7 +87,7 @@ box_Card <- function(text_1,beds,lim,setid) {
       ), 
       div(
         class = "ui horizontal divider",
-        div(style = "font-size:20px;", icon("chart line"), "최근 가용수")
+        div(style = "font-size:20px;", icon("chart line"), "최근 가용병상수")
       ),
       div(
         style = "margin-top: 15px; height: 300px;",
@@ -106,9 +103,9 @@ list_local <- function(main_name,main_eng,i,j) {
   
   box_Card_semi <- function(text_1,i,j,setid) {
     div(
-      class = "row", style = "width: 450px;",
+      class = "column",
       div(
-        class = "ui raised segment",
+        class = "ui raised segment", style = "width: 550px;",
         div(
           class = "ui horizontal divider",
           div(style = "font-size:20px;", icon("procedures"), text_1)
@@ -131,7 +128,7 @@ list_local <- function(main_name,main_eng,i,j) {
         ), 
         div(
           class = "ui horizontal divider",
-          div(style = "font-size:20px;", icon("chart line"), "최근 가용수")
+          div(style = "font-size:20px;", icon("chart line"), "최근 가용병상수(48h)")
         ),
         div(
           style = "margin-top: 15px; height: 300px;",
@@ -144,13 +141,7 @@ list_local <- function(main_name,main_eng,i,j) {
   list(
     menu = main_name , id = paste0(main_eng,"_tab"),
     content =
-      box_Card_semi(paste0(main_name," ","가용수"),i, j, paste0("line_",main_eng)))
+      box_Card_semi(paste0(main_name," ","가용병상수"),i, j, paste0("line_",main_eng)))
 
 }
 
-hc_local <- function(n){
-  renderHighchart({
-    rec24_beds %>%
-      hchart("line", hcaes(x = rc, y = n))
-  })
-}
