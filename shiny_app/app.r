@@ -10,18 +10,23 @@ library(shiny)
 library(shiny.semantic)
 library(highcharter)
 library(semantic.dashboard)
+library(purrr)
+library(dbplyr)
 
 ## --- 0.2 set @Rstudio ---
-source("global.r")
-source("highcharts.r")
+
+dir("man", full.names = T) %>% walk(source)
+
 ## --- 1 Shiny Ui ---
 
 ui <- shinyUI(semanticPage(
-  style = "margin-top: 20px;",
+  login_ui("user", signin = F),
   div(
-    style = "margin-left: 20px; font-size: 20px;",
-    icon("procedures"), "중환자실 모니터링"
-  ),
+    style = "margin-top: 20px;",
+    div(
+      style = "margin-left: 20px; font-size: 20px;",
+      icon("procedures"), "중환자실 모니터링"
+    ),
   tabset(
     tabs =
       list(
@@ -30,18 +35,18 @@ ui <- shinyUI(semanticPage(
           menu = "Home", id = "Home_tab",
           content =
             ### --- 1.1 HOME TAB CONTENT ---
-          div(
-            class = "ui two column grid",
-            box_Card("전국 가용병상수", global_total[1, 2], global_total[2, 2], "line_global"),
             div(
-              class = "column",
+              class = "ui two column grid",
+              box_Card("전국 가용병상수", global_total[1, 2], global_total[2, 2], "line_global"),
               div(
-                class = "ui raised segment",
-                style = "width: 100%; height: 700px;",
-                highchartOutput("hc_global", width = "100%", height = "100%")
+                class = "column",
+                div(
+                  class = "ui raised segment",
+                  style = "width: 100%; height: 700px;",
+                  highchartOutput("hc_global", width = "100%", height = "100%")
+                )
               )
             )
-          )
         ),
         ### --- 1.2 Second tab ---
         list(
@@ -115,12 +120,28 @@ not free for commercial and Governmental use", style = "margin-top:15px;")
         )
       ),
     active = "Home_tab",
-    id = "exampletabset",
+    id = "all_Tabset",
     menu_class = "ui fluid three item menu",
     tab_content_class = "ui bottom stackable"
   )
-))
+)))
 server <- shinyServer(function(input, output) {
+  
+  users <- reactive({ 
+    con <-  RSQLite::dbConnect(RSQLite::SQLite(), "data/users.db") 
+    con %>% 
+      dplyr::tbl("users") %>% 
+      as_tibble()
+  })
+  
+  user <- callModule(login_server, "user", users)
+  
+  observeEvent(user(), {
+    observe(print(user()))
+    callModule(manager_server, "manager", user)
+    callModule(admin_server, "admin", users)
+  })
+  
   output$hc_global <- renderHighchart({
     hcmap(
       map = "countries/kr/kr-all",

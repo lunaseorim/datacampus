@@ -14,6 +14,7 @@ library(semantic.dashboard)
 ## --- 1 Global Environmnet // R.data ---
 ### --- 1.1 icudata.RDS ---
 #### raw_icu : 전체데이터
+
 raw_icu <- readRDS("icu_data.rds")
 
 
@@ -41,8 +42,8 @@ beds_lim <- readRDS("total_beds.rds") %>%
 icu_global <- join(icu_data, beds_lim, by = "variable") %>%
   `colnames<-`(c("variable", "beds", "limit"))
 
-icu_global[,2:3] <- sapply(
-  icu_global[,2:3],as.numeric
+icu_global[, 2:3] <- sapply(
+  icu_global[, 2:3], as.numeric
 )
 
 
@@ -60,11 +61,11 @@ global_total <- data.frame(
 
 ### --- 2.1 shiny box function ---
 
-box_Card <- function(text_1,beds,lim,setid) {
+box_Card <- function(text_1, beds, lim, setid) {
   div(
     class = "column",
     div(
-      class = "ui raised segment",style = "height: 700px;",
+      class = "ui raised segment", style = "height: 700px;",
       div(
         class = "ui horizontal divider",
         div(style = "font-size:20px;", icon("procedures"), text_1)
@@ -84,7 +85,7 @@ box_Card <- function(text_1,beds,lim,setid) {
           class = "label", style = "font-size:15px;",
           paste0(round(beds / lim * 100, 2), "%")
         )
-      ), 
+      ),
       div(
         class = "ui horizontal divider",
         div(style = "font-size:20px;", icon("chart line"), "최근 가용병상수")
@@ -99,9 +100,8 @@ box_Card <- function(text_1,beds,lim,setid) {
 
 
 
-list_local <- function(main_name,main_eng,i,j) {
-  
-  box_Card_semi <- function(text_1,i,j,setid) {
+list_local <- function(main_name, main_eng, i, j) {
+  box_Card_semi <- function(text_1, i, j, setid) {
     div(
       class = "column",
       div(
@@ -125,7 +125,7 @@ list_local <- function(main_name,main_eng,i,j) {
             class = "label", style = "font-size:15px;",
             paste0(round(as.numeric(raw_icu[nrow(raw_icu), i]) / beds_lim$value[j] * 100, 2), "%")
           )
-        ), 
+        ),
         div(
           class = "ui horizontal divider",
           div(style = "font-size:20px;", icon("chart line"), "최근 가용병상수(48h)")
@@ -137,11 +137,10 @@ list_local <- function(main_name,main_eng,i,j) {
       )
     )
   }
-  
+
   list(
-    menu = main_name , id = paste0(main_eng,"_tab"),
+    menu = main_name, id = paste0(main_eng, "_tab"),
     content =
-      box_Card_semi(paste0(main_name," ","가용병상수"),i, j, paste0("line_",main_eng)))
-
+      box_Card_semi(paste0(main_name, " ", "가용병상수"), i, j, paste0("line_", main_eng))
+  )
 }
-

@@ -7,7 +7,6 @@
 
 ## ---Load Package---
 library(highcharter)
-source("global.r")
 
 ## --- 1. Set Map ---
 
@@ -22,19 +21,20 @@ hc_key <- mapdata %>%
   join(., icu_global, match = "all", "variable") %>%
   mutate(perc = round(beds / limit, 2))
 
-#hcmap(
+# hcmap(
 #  map = "countries/kr/kr-all",
 #  data = hc_key,
 #  value = "perc",
 #  dataLabels = list(enabled = F)
-#)
+# )
 
 rec24_beds <- raw_icu %>%
-  `[`( ,-1:-2) %>%
-  filter(서울특별시 != 0 , 경상북도 != 0) %>%
+  `[`(, -1:-2) %>%
+  filter(서울특별시 != 0, 경상북도 != 0) %>%
   sapply(as.numeric) %>%
   data.frame() %>%
-  `[`((nrow(.)-47):nrow(.),) %>%
-  mutate(total = rowSums(.),
-         rc = -48:-1)
-
+  `[`((nrow(.) - 47):nrow(.), ) %>%
+  mutate(
+    total = rowSums(.),
+    rc = -48:-1
+  )

@@ -5,9 +5,9 @@ account: aaaaa123
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2656469
-bundleId: 3498215
+bundleId: 3509467
 url: https://aaaaa123.shinyapps.io/shiny_app/
-when: 1597082278.55715
+when: 1597293293.84888
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: www/KoPubWorld Dotum Medium.ttf
